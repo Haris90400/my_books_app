@@ -57,31 +57,11 @@ class _BooksDiscoveryAppState extends State<BooksDiscoveryApp> {
   @override
   void initState() {
     super.initState();
-    // The one and only place an AuthRepository gets "plugged into" an
-    // AuthBloc. Every screen reaches this same instance via
-    // `context.read<AuthBloc>()` — never constructs its own.
-    //
-    // Deliberately NOT `..add(const AppStarted())` here. This runs
-    // before the widget tree (and SplashScreen's BlocListener) exists —
-    // if Firebase's authStateChanges() resolves fast, the whole
-    // AuthLoading->AuthUnauthenticated transition can complete before
-    // anything is listening, and Splash hangs forever waiting for a
-    // transition that already happened. SplashScreen dispatches this
-    // event itself, from its own initState, once it's actually mounted.
+
     _authBloc = AuthBloc(authRepository: sl<AuthRepository>());
     // AuthGuard needs a direct reference to the Bloc (not `context.read`,
     // since guards can run before there's a BuildContext to read from).
     _appRouter = AppRouter(authBloc: _authBloc);
-
-    // Cross-feature coordination lives HERE, not inside AuthRepository —
-    // `features/auth/` deliberately has no idea `BooksRepository`/Hive
-    // exist. Without this, a second account signing in on the same
-    // device would see the first account's search history and cached
-    // books, since neither Hive box is namespaced per-user. Fires on
-    // every transition INTO AuthUnauthenticated (including a fresh
-    // install with no prior session) — clearing already-empty boxes is
-    // a harmless no-op, so there's no need to distinguish "was this a
-    // real logout" from "there was never a session."
     _authSubscription = _authBloc.stream.listen((state) {
       if (state is AuthUnauthenticated) {
         sl<BooksRepository>().clearLocalData();
