@@ -2,7 +2,7 @@ name: my_books_app
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -35,44 +35,24 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
 
-  # State management — PDF mandates BLoC for every feature module.
-  # Added now (Module 0) even though the first Bloc isn't written until Module 2,
-  # because the choice itself is a project-setup decision, not feature code.
   flutter_bloc: ^9.1.1
   equatable: ^2.0.5
 
-  # Typography — Figma design uses Poppins. google_fonts avoids manually
-  # bundling .ttf files/licenses in assets/fonts for this assignment.
   google_fonts: ^6.2.1
 
   firebase_core: ^3.8.0
 
-  # Module 2 STEP 7 — actual auth calls live behind AuthRemoteDataSource,
-  # this is the only file allowed to import these two packages.
   firebase_auth: ^5.3.3
   google_sign_in: ^6.2.2
 
-  # Module 2 STEP 8 — the "third person" that plugs concrete
-  # implementations (AuthRepositoryImpl) into abstract sockets
-  # (AuthRepository) that Blocs depend on.
   get_it: ^8.0.3
 
-  # Module 3 — PDF-mandated router. Gives per-tab back-stacks
-  # (AutoTabsRouter) and centralized auth redirects (AutoRouteGuard).
   auto_route: ^9.2.2
 
-  # Module 4 STEP 7 — Google Books API client (GoogleBooksRemoteDataSource
-  # is the only file allowed to import this) and local cache for search
-  # history + "all searched books" (Module 8 Analytics reads the latter).
-  # No hive_generator/TypeAdapters — books are stored as plain JSON maps,
-  # which Hive supports natively, avoiding a second code-gen pipeline.
   dio: ^5.7.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
 
-  # Loads .env at startup — real key never hardcoded/committed, only
-  # `service_locator.dart` reads it, DataSources take it as a plain
-  # constructor param (see google_books_remote_data_source.dart).
   flutter_dotenv: ^5.2.1
 
   # Skeleton/shimmer loading placeholders for Home search.
@@ -107,7 +87,6 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
 
-  # Module 3 — generates app_router.gr.dart from @RoutePage() annotations.
   auto_route_generator: ^9.2.1
   build_runner: ^2.4.13
 
@@ -116,7 +95,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

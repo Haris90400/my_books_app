@@ -18,10 +18,8 @@ migrate_working_dir/
 *.iws
 .idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.
-#.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
@@ -49,8 +47,13 @@ lib/firebase_options.dart
 
 # Module 4 — real API keys (Google Books today, Gemini in Module 7).
 # .env.example is committed as the template; this is not.
-.env
 
 docs/
 
 .claude/
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
+config.bat
+node_modules
